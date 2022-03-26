@@ -1,0 +1,23 @@
+[
+	{
+		"Table": "Table1",
+		"Dataset": "datahub",
+		"columns": "a,b,c",
+		"isExist": false,
+		"createQuery": "select * from datahub.xyz"
+	},
+	{
+		"Table": "Table2",
+		"Dataset": "datahub",
+		"columns": "a,b,c",
+		"isExist": true,
+		"createQuery": ""
+	},
+	{
+		"Table": "Table3",
+		"Dataset": "datahub",
+		"columns": "a,b,c",
+		"isExist": false,
+		"createQuery": "select a,b,c,sum(total_cost) from datahub.a1 join from datahub.b1 on a1.id=b1.id group by a,b,c"
+	}
+]

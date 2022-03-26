@@ -1,0 +1,74 @@
+
+/*Total entity*/
+With S1 as 
+(
+	 select a, b, c as actual_sales
+	 from
+	 Table1
+	 where 'BI_100' in (ColA,ColB,ColC)
+),
+S2 as 
+(
+	 select a, b, c * -1 as actual_sales
+	 from
+	 Table1
+	 where 'BI_200' in (business_code)
+)
+select a, b, sum(actual_sales)
+from
+(
+	select * from S1 union all select * from S2
+)
+group by 1,2,3,4
+
+/*Total assets*/
+With S1 as 
+(
+	 select a, b, c as actual_sales
+	 from
+	 Table1
+	 where 'BI_100' in (business_code)
+),
+S2 as 
+(
+	 select a, b, c * -1 as actual_sales
+	 from
+	 Table1
+	 where 'BI_200' in (business_code)
+)
+select a, b, sum(actual_sales)
+from
+(
+	select * from S1 union all select * from S2
+)
+group by 1,2,3,4
+
+/*Total expense*/
+With S1 as 
+(
+	 select a, b, c as actual_sales
+	 from
+	 Table1
+	 where 'BI_100' in (business_code) and 'SI_100' in (segment_code) and 'Corporate' in (function_code)
+)
+select a, b, sum(actual_sales)
+from
+(
+	select * from S1 
+)
+group by 1,2,3,4
+
+/*Total Revenue*/
+With S1 as 
+(
+	 select a, b, c as actual_sales
+	 from
+	 Table1
+	 where 'BI_100' in (business_code) or 'B2_100' in (business_code) or 'B3_100' in (business_code) or 'B4_100' in (business_code)
+)
+select a, b, sum(actual_sales)
+from
+(
+	select * from S1 
+)
+group by 1,2,3,4

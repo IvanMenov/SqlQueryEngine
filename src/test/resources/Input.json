@@ -1,0 +1,154 @@
+[
+	{
+		"kpi_name": "Total assets",
+		"id": 123,
+		"table": "Table1",
+		"filter_list": [
+			{
+				"select_group": "1",
+				"is_minus": "false",
+				"filter_cols": [
+					{
+						"col": "business_code",
+						"val_list": [
+							{
+								"value": "BI_100",
+								"scope": "I"
+							}
+						]
+					}
+				]
+			},
+			{
+				"select_group": "2",
+				"is_minus": "true",
+				"filter_cols": [
+					{
+						"col": "business_code",
+						"val_list": [
+							{
+								"value": "BI_200",
+								"scope": "I"
+							}
+						]
+					}
+				]
+			}
+		],
+		"group_cols": "1,2,3,4"
+	},
+	{
+		"kpi_name": "Total entity",
+		"id": 123,
+		"table": "Table1",
+		"filter_list": [
+			{
+				"select_group": "1",
+				"is_minus": "false",
+				"filter_cols": [
+					{
+						"col": "business_code*",
+						"val_list": [
+							{
+								"value": "BI_100",
+								"scope": "I"
+							}
+						]
+					}
+				]
+			},
+			{
+				"select_group": "2",
+				"is_minus": "true",
+				"filter_cols": [
+					{
+						"col": "business_code",
+						"val_list": [
+							{
+								"value": "BI_200",
+								"scope": "I"
+							}
+						]
+					}
+				]
+			}
+		],
+		"group_cols": "1,2,3,4"
+	},
+	{
+		"kpi_name": "Total expense",
+		"id": 200,
+		"table": "Table1",
+		"filter_list": [
+			{
+				"select_group": "1",
+				"is_minus": "false",
+				"filter_cols": [
+					{
+						"col": "business_code",
+						"val_list": [
+							{
+								"value": "BI_100",
+								"scope": "I"
+							}
+						]
+					},
+					{
+						"col": "segment_code",
+						"val_list": [
+							{
+								"value": "SI_100",
+								"scope": "I"
+							}
+						]
+					},
+					{
+						"col": "function_code",
+						"val_list": [
+							{
+								"value": "Corporate",
+								"scope": "I"
+							}
+						]
+					}
+				]
+			}
+		],
+		"group_cols": "1,2,3,4"
+	},
+	{
+		"kpi_name": "Total Revenue",
+		"id": 250,
+		"table": "Table1",
+		"filter_list": [
+			{
+				"select_group": "1",
+				"is_minus": "false",
+				"filter_cols": [
+					{
+						"col": "business_code",
+						"val_list": [
+							{
+								"value": "BI_100",
+								"scope": "I"
+							},
+							{
+								"value": "B2_100",
+								"scope": "I"
+							},
+							{
+								"value": "B3_100",
+								"scope": "I"
+							},
+							{
+								"value": "B4_100",
+								"scope": "I"
+							}
+						]
+					}
+				]
+			}
+		],
+		"group_cols": "1,2,3,4"
+	}
+]
