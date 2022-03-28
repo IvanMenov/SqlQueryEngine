@@ -117,6 +117,9 @@ public class KPIQueryBuilder extends ASQLBuilder{
 
 	@Override
 	public String buildQuery() {
+		if(getBuilder().length() > 0) {
+			getBuilder().delete(0, getBuilder().length());
+		}
 		if(kpiMap.isEmpty()) {
 			buildMap();
 		}

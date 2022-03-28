@@ -31,6 +31,9 @@ public class TableQueryBuilder extends ASQLBuilder{
 	
 	@Override
 	public String buildQuery() {
+		if(getBuilder().length() > 0) {
+			getBuilder().delete(0, getBuilder().length());
+		}
 		for (int i=0;i< table.length;i++) {
 			if(!table[i].isExist() && table[i].getCreateQuery() != null) {
 				getBuilder().append(new MessageFormat(WRAP_IN_COMMENT).format(new String[] {table[i].getId()}));
