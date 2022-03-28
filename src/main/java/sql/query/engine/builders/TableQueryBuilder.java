@@ -41,7 +41,7 @@ public class TableQueryBuilder extends ASQLBuilder{
 				String query = callCreateTableQuery(table[i]);
 				getBuilder().append(query);
 				
-				if(i< table.length -1) {
+				if(i < table.length -1) {
 					getBuilder().append(NEWLINE);
 				}
 			}

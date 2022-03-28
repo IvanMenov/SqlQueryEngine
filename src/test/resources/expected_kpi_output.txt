@@ -19,7 +19,7 @@ from
 (
 	select * from S1 union all select * from S2
 )
-group by 1,2,3,4
+group by 1,2,3,4;
 
 /*Total assets*/
 With S1 as 
@@ -41,7 +41,7 @@ from
 (
 	select * from S1 union all select * from S2
 )
-group by 1,2,3,4
+group by 1,2,3,4;
 
 /*Total expense*/
 With S1 as 
@@ -56,7 +56,7 @@ from
 (
 	select * from S1 
 )
-group by 1,2,3,4
+group by 1,2,3,4;
 
 /*Total Revenue*/
 With S1 as 
@@ -71,4 +71,4 @@ from
 (
 	select * from S1 
 )
-group by 1,2,3,4
+group by 1,2,3,4;

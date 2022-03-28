@@ -6,7 +6,7 @@ public class CreateTableQuery implements IQuery{
 	
 	@Override
 	public MessageFormat getMessageFormat() {
-		return new MessageFormat("create temp table {0} as {1}");
+		return new MessageFormat("create temp table {0} as {1};");
 	}
 
 }

@@ -6,7 +6,7 @@ public class GroupByQuery implements IQuery{
 
 	@Override
 	public MessageFormat getMessageFormat() {
-		return new MessageFormat("group by {0}");
+		return new MessageFormat("group by {0};");
 	}
 
 }

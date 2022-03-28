@@ -43,8 +43,8 @@ public class TestSet {
 	private static final String KPI_TOTAL_EXPENSE="Total expense";
 	private static final String KPI_TOTAL_REVENUE ="Total Revenue";
 	
-	private static final String EXPECTED_QUERY_TABLE1 = "create temp table Table1 as select * from datahub.xyz";
-	private static final String EXPECTED_QUERY_TABLE3 = "create temp table Table3 as select a,b,c,sum(total_cost) from datahub.a1 join from datahub.b1 on a1.id=b1.id group by a,b,c";
+	private static final String EXPECTED_QUERY_TABLE1 = "create temp table Table1 as select * from datahub.xyz;";
+	private static final String EXPECTED_QUERY_TABLE3 = "create temp table Table3 as select a,b,c,sum(total_cost) from datahub.a1 join from datahub.b1 on a1.id=b1.id group by a,b,c;";
 
 	private Table[] tables = null;
 	private Input[] inputs = null;
