@@ -9,13 +9,55 @@ public class Table {
 	@JsonProperty("Dataset")
 	private String dataSet;
 	
-	private String[] columns;
+	@JsonProperty("columns_group_list")
+	private String[] columnsGroupList;
+	
+	@JsonProperty("columns_agg_list")
+	private String[] columnsAggList;
+	
+	@JsonProperty("columns_agg_func")
+	private String[] columnsAggFunction;
 
 	@JsonProperty("isExist")
 	private boolean isExist;
 	
 	private String createQuery;
 	
+	
+	public String[] getColumnsGroupList() {
+		return columnsGroupList;
+	}
+	public String getColumnsListAsString(String[] name) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < name.length; i++) {
+			builder.append(name[i]);
+			
+			if(i < name.length -1) {
+				builder.append(", ");
+			}
+			
+		}
+		return builder.toString();
+	}
+	public void setColumnsGroupList(String columnsGroupList) {
+		this.columnsGroupList = columnsGroupList.split(",");
+	}
+
+	public String[] getColumnsAggList() {
+		return columnsAggList;
+	}
+
+	public void setColumnsAggList(String columnsAggList) {
+		this.columnsAggList = columnsAggList.split(",");
+	}
+
+	public String[] getColumnsAggFunction() {
+		return columnsAggFunction;
+	}
+
+	public void setColumnsAggFunction(String columnsAggFunction) {
+		this.columnsAggFunction = columnsAggFunction.split(",");
+	}
 
 	public String getId() {
 		return id;
@@ -33,25 +75,8 @@ public class Table {
 		this.dataSet = dataSet;
 	}
 
-	public String[] getColumns() {
-		return columns;
-	}
-
-	public String getColumnsAsString(int maxColumnCount) {
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < maxColumnCount; i++) {
-			builder.append(columns[i]);
-			
-			if(i < maxColumnCount -1) {
-				builder.append(", ");
-			}
-			
-		}
-		return builder.toString();
-	}
-	
 	public void setColumns(String columns) {
-		this.columns = columns.split(",");
+		this.columnsGroupList = columns.split(",");
 	}
 
 	public boolean isExist() {

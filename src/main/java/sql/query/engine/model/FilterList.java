@@ -23,7 +23,13 @@ public class FilterList {
 	public String isMinus() {
 		return isMinus;
 	}
-
+	public boolean isMinusAsBoolean() {
+		if(this.isMinus.equals("")) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 	@JsonProperty("is_minus")
 	public void setMinus(String isMinus) {
 		if(Boolean.parseBoolean(isMinus)) {

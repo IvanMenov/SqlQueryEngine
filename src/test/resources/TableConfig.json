@@ -2,21 +2,27 @@
 	{
 		"Table": "Table1",
 		"Dataset": "datahub",
-		"columns": "a,b,c",
+		"columns_group_list": "a,b",
+		"columns_agg_list":"c,d",
+		"columns_agg_func":"sum",
 		"isExist": false,
 		"createQuery": "select * from datahub.xyz"
 	},
 	{
 		"Table": "Table2",
 		"Dataset": "datahub",
-		"columns": "a,b,c",
+		"columns_group_list": "a,b,c",
+		"columns_agg_list":"d,e",
+		"columns_agg_func":"sum",
 		"isExist": true,
 		"createQuery": ""
 	},
 	{
 		"Table": "Table3",
 		"Dataset": "datahub",
-		"columns": "a,b,c",
+		"columns_group_list": "a,b,c",
+		"columns_agg_list":"d",
+		"columns_agg_func":"sum",
 		"isExist": false,
 		"createQuery": "select a,b,c,sum(total_cost) from datahub.a1 join from datahub.b1 on a1.id=b1.id group by a,b,c"
 	}
