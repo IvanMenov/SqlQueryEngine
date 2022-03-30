@@ -3,7 +3,13 @@ package sql.query.engine.builders;
 import java.util.Map;
 
 public abstract class ASQLBuilder{
-			
+	
+	public static final String OR = " or ";
+	
+	public static final String AND = " and ";
+
+	public static final String WITH = "With ";
+	
 	public static final String WRAP_IN_COMMENT = "/*{0}*/";
 
 	public static final String NEWLINE = "\n";

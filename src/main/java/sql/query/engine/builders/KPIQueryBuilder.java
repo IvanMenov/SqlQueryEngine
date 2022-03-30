@@ -13,7 +13,6 @@ import sql.query.engine.model.Table;
 import sql.query.engine.model.ValList;
 import sql.query.engine.queries.GroupByQuery;
 import sql.query.engine.queries.InnerSelectWithUnionQuery;
-import sql.query.engine.queries.SQLOperators;
 import sql.query.engine.queries.SelectPart;
 import sql.query.engine.queries.SelectTableOuterQuery;
 import sql.query.engine.queries.SelectTablesSubQuery;
@@ -66,7 +65,7 @@ public class KPIQueryBuilder extends ASQLBuilder{
 				StringBuilder innerSelectBuilder = new StringBuilder(); 
 				
 				if(filterList != null && filterList.length > 0) {
-					getBuilder().append(SQLOperators.WITH.getOperatorValue());
+					getBuilder().append(WITH);
 					
 				
 					constructSelectGroupsFromFilterList(table, filterList, selectGroups);
@@ -184,7 +183,7 @@ public class KPIQueryBuilder extends ASQLBuilder{
 			
 			
 			if( filterColsIndex < filterCols.length-1) {
-				whereBuilder.append(SQLOperators.AND.getOperatorValue());
+				whereBuilder.append(AND);
 			}
 								
 		}
@@ -203,7 +202,7 @@ public class KPIQueryBuilder extends ASQLBuilder{
 			}
 			
 			if( valListIndex < valList.length -1) {
-				whereBuilder.append(SQLOperators.OR.getOperatorValue());
+				whereBuilder.append(OR);
 			}
 		}
 	}
