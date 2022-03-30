@@ -38,6 +38,7 @@ public class KPIQueryBuilder extends ASQLBuilder{
 	 * kpiMap and appending each kpi id - query pair to a single String*/
 	@Override
 	public String buildQuery() {
+		//to make the buildQuery idempotent delete its content every time we call this method and construct it again
 		if(getBuilder().length() > 0) {
 			getBuilder().delete(0, getBuilder().length());
 		}
@@ -65,10 +66,9 @@ public class KPIQueryBuilder extends ASQLBuilder{
 				StringBuilder innerSelectBuilder = new StringBuilder(); 
 				
 				if(filterList != null && filterList.length > 0) {
-					getBuilder().append(WITH);
-					
-				
+					getBuilder().append(WITH);	
 					constructSelectGroupsFromFilterList(table, filterList, selectGroups);
+					
 					if(getBuilder().lastIndexOf(COMMA) != -1) {
 						getBuilder().deleteCharAt(getBuilder().lastIndexOf(COMMA));
 					}
@@ -172,7 +172,7 @@ public class KPIQueryBuilder extends ASQLBuilder{
 		}
 	}
 
-
+	/* iterate over the filter_cols and append each part with and AND operator*/
 	private void constructWhereClauseFromFilterCols(SelectTablesSubQuery subQuery, StringBuilder whereBuilder,
 			FilterCols[] filterCols) {
 		for (int filterColsIndex=0; filterColsIndex < filterCols.length; filterColsIndex++) {
@@ -189,10 +189,14 @@ public class KPIQueryBuilder extends ASQLBuilder{
 		}
 	}
 
-
+	/*
+	 * iterate over the val_list.
+	 * to construct where clause with OR operator 
+	 */	
 	private void constructWhereClauseFromValList(StringBuilder whereBuilder, FilterCols[] filterCols, int filterColsIndex,
 			WhereClause whereClause, ValList[] valList) {
 		for(int valListIndex = 0; valListIndex < valList.length; valListIndex++) {
+			//if the col from filter_cols array ends with * then we can check the value for that key using Entities.getEntity(key)
 			if(filterCols[filterColsIndex].getCol().endsWith(ASTERISK)) {
 				String columnName = filterCols[filterColsIndex].getCol();
 				String key = columnName.substring(0, columnName.lastIndexOf(ASTERISK));
