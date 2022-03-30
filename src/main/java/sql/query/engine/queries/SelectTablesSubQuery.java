@@ -19,7 +19,7 @@ public class SelectTablesSubQuery implements IQuery {
 				
 		@Override
 		public MessageFormat getMessageFormat() {
-			return  new MessageFormat(" ''{0}'' in ({1}) ");
+			return  new MessageFormat(" (''{0}'' in ({1})) ");
 		}
 	}
 

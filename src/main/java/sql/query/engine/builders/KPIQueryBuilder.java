@@ -24,6 +24,8 @@ public class KPIQueryBuilder extends ASQLBuilder{
 	
 	private Input[] inputs;
 	
+	/* this is and auxiliary map that would hold the Table objects for each table 
+	 * so that we can extract the column names when forming the kpi select queries*/
 	private Map<String, Table> tableNameToTableObj = new HashMap<>();
 	
 	private Map<String, String>kpiMap = new HashMap<>();
@@ -33,6 +35,8 @@ public class KPIQueryBuilder extends ASQLBuilder{
 		mapTableIdToTableObj(tables);
 	}
 	
+	/* build the whole query by iterating through the
+	 * kpiMap and appending each kpi id - query pair to a single String*/
 	@Override
 	public String buildQuery() {
 		if(getBuilder().length() > 0) {
@@ -49,7 +53,8 @@ public class KPIQueryBuilder extends ASQLBuilder{
 		});
 		return getBuilder().toString();
 	}
-
+	
+	/* build a map of kpi id to query for that kpi based on the deserialized Input for each*/
 	@Override
 	public Map<String, String> buildMap() {
 		if(kpiMap.isEmpty()) {
@@ -57,22 +62,26 @@ public class KPIQueryBuilder extends ASQLBuilder{
 				Table table = tableNameToTableObj.get(input.getTableId());
 				FilterList[] filterList = input.getFilterList();
 				
-				if(filterList.length != 0) {
-					getBuilder().append(SQLOperators.WITH.getOperatorValue());
-				}
 				List<String>selectGroups = new ArrayList<>();
-				
-				constructSelectGroupsFromFilterList(table, filterList, selectGroups);
-				
-				if(getBuilder().lastIndexOf(COMMA) != -1) {
-					getBuilder().deleteCharAt(getBuilder().lastIndexOf(COMMA));
-				}
-				
 				StringBuilder innerSelectBuilder = new StringBuilder(); 
 				
-				constructSelectWithUnion(selectGroups, innerSelectBuilder);
+				if(filterList != null && filterList.length > 0) {
+					getBuilder().append(SQLOperators.WITH.getOperatorValue());
+					
+				
+					constructSelectGroupsFromFilterList(table, filterList, selectGroups);
+					if(getBuilder().lastIndexOf(COMMA) != -1) {
+						getBuilder().deleteCharAt(getBuilder().lastIndexOf(COMMA));
+					}
+					
+					constructSelectWithUnion(selectGroups, innerSelectBuilder);
+				}			
 				
 				constructOuterSelect(input, table, selectGroups, innerSelectBuilder);	
+				
+				if(input.getGroupColums() != null) {
+					addGroupBy(input);
+				}
 				
 				if(getBuilder().charAt(getBuilder().length() -1) != SEMICOLON) {
 					getBuilder().append(SEMICOLON);
@@ -83,6 +92,11 @@ public class KPIQueryBuilder extends ASQLBuilder{
 			}
 		}
 		return kpiMap;
+	}
+
+	private void addGroupBy(Input input) {
+		GroupByQuery groupBy = new GroupByQuery();
+		getBuilder().append( groupBy.build(input.getGroupColums()));
 	}
 
 	private void constructOuterSelect(Input input, Table table, List<String> selectGroups,
@@ -110,12 +124,9 @@ public class KPIQueryBuilder extends ASQLBuilder{
 		
 		SelectPart select = new SelectPart();
 		
-		
-		GroupByQuery groupBy = new GroupByQuery();
-		
 		getBuilder().append(
 				selectTableQuery.build(new String[] { select.build(colGroupList, builder.toString()),
-						selectGroups.isEmpty() ? table.getId() : innerSelectBuilder.toString(), groupBy.build(input.getGroupColums()) }));
+						selectGroups.isEmpty() ? table.getId() : innerSelectBuilder.toString() }));
 	}
 
 	private void mapTableIdToTableObj(Table[] tables) {
@@ -125,6 +136,9 @@ public class KPIQueryBuilder extends ASQLBuilder{
 
 	}
 	
+	/*
+	 * construct the sub select queries that are formed from the filter_list given
+	 */	
 	private void constructSelectGroupsFromFilterList(Table table, FilterList[] filterList, List<String> selectGroups) {
 		for (int filterListIndex=0; filterListIndex < filterList.length; filterListIndex++ ) {
 			selectGroups.add(filterList[filterListIndex].getSelectGroup());

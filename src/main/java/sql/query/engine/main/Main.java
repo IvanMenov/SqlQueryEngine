@@ -39,13 +39,7 @@ public class Main {
 				+ "	}\r\n"
 				+ "]";
 //		
-//		String kpi = "[{\r\n"
-//				+ "\"kpi_name\": \"Total Revenue-with-no-filter\",\r\n"
-//				+ "\"id\": 255,\r\n"
-//				+ "\"table\": \"Table1\",\r\n"
-//				+ "\"filter_list\": [],\r\n"
-//				+ "\"group_cols\": \"1,2,3,4\"\r\n"
-//				+ "}]";
+		String kpi = "[{\"kpi_name\":\"Total assets\",\"id\":123,\"table\":\"Table1\",\"filter_list\":[]}]";
 		
 		String kpi2 = "[{\r\n"
 				+ "		\"kpi_name\": \"Total assets\",\r\n"
@@ -86,7 +80,7 @@ public class Main {
 				+ "		\"group_cols\": \"1,2,3,4\"\r\n"
 				+ "	}]";
 		Table[] tables = Parser.parseToObject(tableConf, Table[].class);
-		Input[] input = Parser.parseToObject(kpi2, Input[].class);
+		Input[] input = Parser.parseToObject(kpi, Input[].class);
 		KPIQueryBuilder builder = new KPIQueryBuilder(input, tables);
 		System.out.println(builder.buildQuery());
 		

@@ -5,14 +5,14 @@ With S1 as
 	 select a, b, c, d
 	 from
 	 Table1
-	 where 'BI_100' in (ColA,ColB,ColC)
+	 where ('BI_100' in (ColA,ColB,ColC))
 ),
 S2 as 
 (
 	 select a, b, c * -1 as c, d * -1 as d
 	 from
 	 Table1
-	 where 'BI_200' in (business_code)
+	 where ('BI_200' in (business_code))
 )
 select a, b, sum(c) as c, sum(d) as d
 from
@@ -27,14 +27,14 @@ With S1 as
 	 select a, b, c, d
 	 from
 	 Table1
-	 where 'BI_100' in (business_code)
+	 where ('BI_100' in (business_code))
 ),
 S2 as 
 (
 	 select a, b, c * -1 as c, d * -1 as d
 	 from
 	 Table1
-	 where 'BI_200' in (business_code)
+	 where ('BI_200' in (business_code))
 )
 select a, b, sum(c) as c, sum(d) as d
 from
@@ -49,7 +49,7 @@ With S1 as
 	 select a, b, c, d
 	 from
 	 Table1
-	 where 'BI_100' in (business_code) and 'SI_100' in (segment_code) and 'Corporate' in (function_code)
+	 where ('BI_100' in (business_code)) and ('SI_100' in (segment_code)) and ('Corporate' in (function_code))
 )
 select a, b, sum(c) as c, sum(d) as d
 from
@@ -64,7 +64,7 @@ With S1 as
 	 select a, b, c, d
 	 from
 	 Table1
-	 where 'BI_100' in (business_code) or 'B2_100' in (business_code) or 'B3_100' in (business_code) or 'B4_100' in (business_code)
+	 where ('BI_100' in (business_code)) or ('B2_100' in (business_code)) or ('B3_100' in (business_code)) or ('B4_100' in (business_code))
 )
 select a, b, sum(c) as c, sum(d) as d
 from
